@@ -5,6 +5,8 @@ VisualStudioVersion = 17.5.33627.172
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BookMan.ConsoleApp", "BookMan.ConsoleApp\BookMan.ConsoleApp.csproj", "{F5DFB281-ECD2-4292-BDE7-DAFA1193D3D5}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "patternMatching", "patternMatching\patternMatching.csproj", "{B463FF0E-D620-475F-B287-2B841AEC1EC6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{F5DFB281-ECD2-4292-BDE7-DAFA1193D3D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5DFB281-ECD2-4292-BDE7-DAFA1193D3D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5DFB281-ECD2-4292-BDE7-DAFA1193D3D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B463FF0E-D620-475F-B287-2B841AEC1EC6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B463FF0E-D620-475F-B287-2B841AEC1EC6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B463FF0E-D620-475F-B287-2B841AEC1EC6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B463FF0E-D620-475F-B287-2B841AEC1EC6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
