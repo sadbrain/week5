@@ -1,43 +1,55 @@
 ﻿
 namespace BookMan.ConsoleApp.Controllers
 {
-    using Models;
+    using BookMan.ConsoleApp.FrameWork;
+    using DataServices;
+
     using Views;
 
     /// <summary>
     /// Lớp điều khiển, giúp ghép nối dữ liêu với giao diện
+    /// hàm này sẽ gián tiếp xử lý dữ liệu thông qua lớp Repository
     /// </summary>
-    class BookController
+    class BookController : ControllerBase
     {
+
+        protected Repository Repository;
+        public BookController (SimpleDataAccess context)
+        {
+            //tạo đối tượng của lớp Repostitory để có thể dùng các method xử lý dữ liệu
+            Repository = new Repository (context);
+   
+        }
         /// <summary>
         /// ghép nối dữ liệu 1 cuốn sách với giao diện hiển thị 1 cuôn sách
         /// </summary>
         /// <param name="Id"></param>
-        public void Single(int Id)
+        public void Single(int id, string path = "")
         {
-            Book model1 = new Book
-            {
-                Id = 1,
-                Author = "Adam Freeman",
-                Title = "Expert ASP.NET Web API 2 for MVC Developers (The Expert's Voice in .NET)",
-                Publisher = "Apress",
-                Year = 2014,
-                Tags = "c#, asp.net, mvc",
-                Description = "Expert insight and understanding of how to create, customize, and deploy complex, flexible, and robust HTTP web services",
-                Rating = 5,
-                Reading = true
-            };
-            //khởi tạo view 
-            BookSingleView view = new BookSingleView(model1);
-            //gọi phương thức render để hiện thị ra mà hình thông tin cuốn sách
-            view.Render();
+            //lấy cuốn sách có id theo điều cầu
+            var model = Repository.Select(id);
+            //thực hiện lệnh hàm Render in ControllerBase
+            Render(new BookSingleView(model), path);
         }
 
+        public void List(string path = "")
+        {
+
+            var model = Repository.Select();
+            //thực hiện lệnh hàm Render in ControllerBase
+
+            Render(new BookListView(model), path); 
+    
+        }
         public void Create()
         {
-            BookCreateView view = new BookCreateView();
-            view.Render(); // hiện thị ra màn hình hàm tạo sách mới
+            Render(new BookCreateView());
         }   
+        public void Update(int id)
+        {
+            var model = Repository.Select(id);
+            Render(new BookUpdateView(model));
+        }
     }
 
 

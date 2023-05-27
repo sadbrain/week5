@@ -13,3 +13,5 @@ C:\Users\admin\source\repos\BOOKMAN\BookMan.ConsoleApp\obj\Debug\net7.0\refint\B
 C:\Users\admin\source\repos\BOOKMAN\BookMan.ConsoleApp\obj\Debug\net7.0\BookMan.ConsoleApp.pdb
 C:\Users\admin\source\repos\BOOKMAN\BookMan.ConsoleApp\obj\Debug\net7.0\BookMan.ConsoleApp.genruntimeconfig.cache
 C:\Users\admin\source\repos\BOOKMAN\BookMan.ConsoleApp\obj\Debug\net7.0\ref\BookMan.ConsoleApp.dll
+C:\Users\admin\source\repos\BOOKMAN\BookMan.ConsoleApp\bin\Debug\net7.0\Newtonsoft.Json.dll
+C:\Users\admin\source\repos\BOOKMAN\BookMan.ConsoleApp\obj\Debug\net7.0\BookMan.ConsoleApp.csproj.CopyComplete

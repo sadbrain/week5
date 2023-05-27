@@ -1,63 +1,93 @@
-﻿using System;
-using static System.Console;
+﻿using static System.Console;
 
 namespace BookMan.ConsoleApp.Views
 {
     using Models;
+    using FrameWork;
+
     /// <summary>
     /// class hiển thị một cuốn cách
     /// </summary>
-    class BookSingleView
-    {
-        //biến chứa thông tin cuốn sách
-        protected Book Model;
 
-        public BookSingleView(Book model)
-        {
-            Model = model;
-        }
+    /*cách sử dụng kế thừa với viewBase khi không có viewBase<T>
+    class BookSingleView : ViewBase
+    {
+
+        //chỉ định hàm tạo của viewBase
+        public BookSingleView(Book model) : base(model) {}
 
         /// <summary>
         /// hàm hiện thị thông tin 1 cuốn sách
         /// </summary>
-        public void Render()
+        public override void Render()
         {
             //kiểm tra xem Model có dữ liệu không
             if (Model == null) 
             {
-                WriteLine("NO BOOK FOUND/. SORRY!", ConsoleColor.Red);
+                ViewHelp.WriteLine("NO BOOK FOUND/. SORRY!", ConsoleColor.Red);
                 return;
             }
 
-            WriteLine("BOOK DETAIL INFORMATION", ConsoleColor.Green);
 
-            Console.WriteLine($"Author:         {Model.Author}");
-            Console.WriteLine($"Title:          {Model.Title}");
-            Console.WriteLine($"Publisher:      {Model.Publisher}");
-            Console.WriteLine($"Year:           {Model.Year}");
-            Console.WriteLine($"Edition:        {Model.Edition}");
-            Console.WriteLine($"Isbn:           {Model.Isbn}");
-            Console.WriteLine($"Tags:           {Model.Tags}");
-            Console.WriteLine($"Description:    {Model.Description}");
-            Console.WriteLine($"Rating:         {Model.Rating}");
-            Console.WriteLine($"Reading:        {Model.Reading}");
-            Console.WriteLine($"FIle:           {Model.File}");
-            Console.WriteLine($"NameFile:       {Model.FileName}");
+            ViewHelp.WriteLine("BOOK DETAIL INFORMATION", ConsoleColor.Green);
+
+            //chuyển đổi từ obj về book, chỉ áp dụng với kiểu class
+            var model = Model as Book;
+            WriteLine($"Author:         {model.Author}");
+            WriteLine($"Title:          {model.Title}");
+            WriteLine($"Publisher:      {model.Publisher}");
+            WriteLine($"Year:           {model.Year}");
+            WriteLine($"Edition:        {model.Edition}");
+            WriteLine($"Isbn:           {model.Isbn}");
+            WriteLine($"Tags:           {model.Tags}");
+            WriteLine($"Description:    {model.Description}");
+            WriteLine($"Rating:         {model.Rating}");
+            WriteLine($"Reading:        {model.Reading}");
+            WriteLine($"FIle:           {model.File}");
+            WriteLine($"NameFile:       {model.FileName}");
 
         }
+
+
+    } */
+
+    //cách sử dụng kế thừa kết hợp với generic
+    class BookSingleView : ViewBase<Book>
+    {
+
+        //chỉ định hàm tạo của viewBase
+        public BookSingleView(Book model) : base(model) { }
 
         /// <summary>
-        /// in thông báo ra màn hình với chữ màu
+        /// hàm hiện thị thông tin 1 cuốn sách
         /// </summary>
-        /// <param name="message"></param>
-        /// <param name="color"></param>
-        protected void WriteLine(string message, ConsoleColor color)
+        public override void Render()
         {
-            ForegroundColor = color;
-            Console.WriteLine(message);
-            ResetColor();
+            //kiểm tra xem Model có dữ liệu không
+            if (Model == null)
+            {
+                ViewHelp.WriteLine("NO BOOK FOUND/. SORRY!", ConsoleColor.Red);
+                return;
+            }
 
+
+            ViewHelp.WriteLine("BOOK DETAIL INFORMATION", ConsoleColor.Green);
+
+            WriteLine($"Author:         {Model.Author}");
+            WriteLine($"Title:          {Model.Title}");
+            WriteLine($"Publisher:      {Model.Publisher}");
+            WriteLine($"Year:           {Model.Year}");
+            WriteLine($"Edition:        {Model.Edition}");
+            WriteLine($"Isbn:           {Model.Isbn}");
+            WriteLine($"Tags:           {Model.Tags}");
+            WriteLine($"Description:    {Model.Description}");
+            WriteLine($"Rating:         {Model.Rating}");
+            WriteLine($"Reading:        {Model.Reading}");
+            WriteLine($"FIle:           {Model.File}");
+            WriteLine($"NameFile:       {Model.FileName}");
 
         }
+
+
     }
 }

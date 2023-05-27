@@ -1,8 +1,10 @@
 {
   "version": 2,
-  "dgSpecHash": "KX6cqP/A3nnLQ5JneddxpRMOH2i1Fv1fbFtEOSxt5NgKrrIDmM/bnQdzFzhaBm+wlr/HDEnl1qRstu1xOWl8qQ==",
+  "dgSpecHash": "LgIzxJzmyJkGneCIr6hBoxESZawzXaEFBYqrtjUg36LJZ+oMy6zjREaw39hLOs/q181KH1LCgtgB0bCXN4lRrQ==",
   "success": true,
   "projectFilePath": "C:\\Users\\admin\\source\\repos\\BOOKMAN\\BookMan.ConsoleApp\\BookMan.ConsoleApp.csproj",
-  "expectedPackageFiles": [],
+  "expectedPackageFiles": [
+    "C:\\Users\\admin\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512"
+  ],
   "logs": []
 }
