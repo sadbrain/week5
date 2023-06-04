@@ -1,5 +1,6 @@
 ﻿
 using static System.Console;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace BookMan.ConsoleApp.Views
 {
@@ -29,6 +30,19 @@ namespace BookMan.ConsoleApp.Views
             var rating = ViewHelp.InputInt("Rate");
             bool reading = ViewHelp.InputBool("Reading");
             var file = ViewHelp.InputString("File");
+
+            var request = "do create ? " +
+                $"title = {title}" +
+                $" & author = {authors}" +
+                $" & publisher = {publisher}" +
+                $" & year = {year}" +
+                $" & edition = {edition}" +
+                $" & tags = {tags}" +
+                $" & description = {description}" +
+                $" & rate = {rating}" +
+                $" & reading = {reading}" +
+                $" & file = {file}";
+            Router.Forward(request);
         }
         
 

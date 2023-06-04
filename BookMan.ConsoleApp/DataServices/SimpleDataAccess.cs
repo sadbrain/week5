@@ -1,12 +1,11 @@
-﻿using System.Collections.Generic;
-
+﻿
 namespace BookMan.ConsoleApp.DataServices
 {
     using Models;
     /// <summary>
     /// lớp trung gian giúp Repositori làm việc với loại dữ liệu là các obj
     /// </summary>
-    public class SimpleDataAccess
+    public class SimpleDataAccess : IDataAccess
     {
         /// <summary>
         ///  Property là một list các Book

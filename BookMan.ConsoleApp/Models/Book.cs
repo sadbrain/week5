@@ -6,6 +6,8 @@ namespace BookMan.ConsoleApp.Models
     /// id, author, title, publisher, year, edition
     /// Isbn, tags, description, rating, file, fileName, reading
     /// </summary>
+    
+    [Serializable] //cho phép đối tượng từ class này serialization and deserialization
     public class Book
     {
         int _id = 1;

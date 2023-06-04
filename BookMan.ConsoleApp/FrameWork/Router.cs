@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Reflection;
+using System.Text;
 
 namespace BookMan.ConsoleApp.FrameWork
 {
@@ -86,7 +87,16 @@ namespace BookMan.ConsoleApp.FrameWork
                 throw new Exception("Command not found!");
             if (req.Parameter == null)
                 //lấy action tương ứng với route và gọi 
-                _routingTable[req.Route]?.Invoke();
+                try
+                {
+                    _routingTable[req.Route]?.Invoke();
+
+                }
+                catch(NullReferenceException)
+                {
+                    ViewHelp.WriteLine("please check help of command: help ? cmd = <commad>", ConsoleColor.Red);
+                }
+
             else
                 _routingTable[req.Route]?.Invoke(req.Parameter);
 
