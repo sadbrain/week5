@@ -58,7 +58,13 @@ namespace BookMan.ConsoleApp.Controllers
             if (book == null)
             {
                 var model = Repository.Select(id);
-                Render(new BookUpdateView(model));
+                if(model != null)
+                {
+                    Render(new BookUpdateView(model));
+                    return;
+                }
+
+                Inform("No book found, please choose another book");
                 return;
             }
             Repository.Update(id, book);
@@ -73,7 +79,12 @@ namespace BookMan.ConsoleApp.Controllers
             if (!process)
             {
                 var b = Repository.Select(id);
-                Confirm($"Do you want to delete this book ({b.Title}) ? ", $"do delete ? id = {b.Id}");
+                if(b != null)  Confirm($"Do you want to delete this book ({b.Title}) ? ", $"do delete ? id = {b.Id}");
+                else
+                {
+                    Inform("No book found, please choose another book");
+                    return;
+                }
 
             }
             else
@@ -83,18 +94,15 @@ namespace BookMan.ConsoleApp.Controllers
             }
         }
 
-        public void Filter(string key)
+        public void Filter(string key, string optionSort = null)
         {
             var models = Repository.Select(key);
-            //lọc theo từ khóa 
-            if (models.Length == 0)
-            {
-                Inform("No matched book found!");
-            }
-            else
-            {
-                Render(new BookListView(models));
-            }
+
+            if (models.Length == 0) { Inform("No matched book found"); return; }
+            if (optionSort != null) Repository.Sort(models, 0, models.Length - 1, optionSort);
+            Render(new BookListView(models));
+
+
         }
 
         public void Mark(int id, bool read = true)
@@ -117,6 +125,8 @@ namespace BookMan.ConsoleApp.Controllers
         {
             //lọc ra những cuốn sách đã đọc và hiện ra màn hình
             var model = Repository.SelectMarked();
+            if (model.Length == 0) Error("Book not found!");
+            else
             Render(new BookListView(model));
         }
 

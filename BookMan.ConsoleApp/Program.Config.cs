@@ -32,9 +32,7 @@
                 action: p => controller.List(),
                 help: "[list] display all books");
             r.Register(route: "list file",
-                action: p => {
-                    if (!ParameterIsNull(p, "please list file ? path = <value>") controller.List(p["path"]); 
-                },
+                action: p =>  controller.List(p["path"]),
                 help: "[list file ? path = <value>] retrieve all book to file");
             r.Register(route: "single",
                 action: p => { 
@@ -77,27 +75,19 @@
 
             //add add file có đuôi theo người dùng chọn có trong môt thư mục
             r.Register(route: "add shell",
-                        action: p => {
-                            if (!ParameterIsNull(p, "please enter add shell ? path = <value> & ext = <value>")  shell.Shell(p["path"], p["ext"]);
-                        },
+                        action: p =>  shell.Shell(p["path"], p["ext"]),
                         help: "[add shell ? path = <value> & ext = <value>] add books by a folder");
             //mở file và đọc
             r.Register(route: "read",
-                        action: p => {
-                            if (!ParameterIsNull(p, "please read ? id = <value>") shell.Read(p["id"].ToInt()); 
-                        },
+                        action: p =>  shell.Read(p["id"].ToInt()),
                         help: "[read ? id = <value>] open file and read book");
 
 
             r.Register(route: "mark",
-                        action: p => {
-                            if (!ParameterIsNull(p, "please mark ? id = <value>") controller.Mark(p["id"].ToInt());
-                        },
+                        action: p => controller.Mark(p["id"].ToInt()),
                         help: "[mark ? id = <value>] mark as read");
             r.Register(route: "unmark",
-                       action: p => {
-                           if (!ParameterIsNull(p, "please unmark ? id = <value>") controller.Mark(p["id"].ToInt(), false);
-                       },
+                       action: p =>  controller.Mark(p["id"].ToInt(), false)    ,
                         help: "[unmark ? id = <value>] unmark as read");
            
             r.Register(route: "show marks",
@@ -119,6 +109,22 @@
                     action: p => controller.Stats(),
                     help: "[show stats]");
 
+            r.Register(route: "filter and sort",
+            action: p => controller.Filter(p["key"], p["optionSort"].ToLower()),
+             help: "[filter and sort ? key = <value>] & optionSort = <value>");
+
+            r.Register(route: "open folder",
+                action: p => shell.OpenFolder(p["id"].ToInt()),
+                help: "[open folder ? id = <value>] open folder contain file was found");
+            r.Register(route: "copy file",
+                      action: p => shell.CopyFile(p["id"], p["path"]),
+                      help: "[copy file? id = <value>, <value2> ... & path = <value>(path of folder)] open folder contain file was found");
+            r.Register(route: "auto create",
+                    action: p => shell.AutoCreateData(),
+                    help: "[auto create] auto add new book when have a new file in folder");
+            r.Register(route: "auto delete",
+                        action: p => shell.AutoDeleteData(),
+                        help: "[auto delete] auto delete a book when have deleted new file in folder");
             //local function check Parameter is null and render a message
             bool ParameterIsNull(Parameter p, string message, ConsoleColor color = ConsoleColor.Red)
             {
@@ -130,7 +136,6 @@
                 return false;
             }
             //local function to convert parameter to book object
-
             Book toBook(Parameter p)
             {
                 var b = new Book();
@@ -138,6 +143,7 @@
                 if (p.ContainsKey("author")) b.Author = p["author"];
                 if (p.ContainsKey("title")) b.Title = p["title"];
                 if (p.ContainsKey("publisher")) b.Publisher = p["publisher"];
+                if (p.ContainsKey("isbn")) b.Isbn = p["isbn"];
                 if (p.ContainsKey("year")) b.Year = p["year"].ToInt();
                 if (p.ContainsKey("edition")) b.Edition = p["edition"].ToInt();
                 if (p.ContainsKey("isbn")) b.Isbn = p["isbn"];
@@ -148,7 +154,7 @@
                 if (p.ContainsKey("reading")) b.Reading = p["reading"].ToBool();
                 return b;
             }
-            #endregion
+            #endregion  
 
         }
     }

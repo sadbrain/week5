@@ -19,10 +19,11 @@ namespace BookMan.ConsoleApp.Views
         /// </summary>
         public override void Render()
         {
-            WriteLine("CREATE A NEW BOOK", ConsoleColor.Green);
+            ViewHelp.WriteLine("CREATE A NEW BOOK", ConsoleColor.Green);
             string title = ViewHelp.InputString("Title");
             string authors = ViewHelp.InputString("Authors");
             string publisher = ViewHelp.InputString("Publisher");
+            var isbn = ViewHelp.InputString("ISBN");
             int year =  ViewHelp.InputInt("Year");
             int edition = ViewHelp.InputInt("Edition");
             var tags = ViewHelp.InputString("Tags");
@@ -35,6 +36,7 @@ namespace BookMan.ConsoleApp.Views
                 $"title = {title}" +
                 $" & author = {authors}" +
                 $" & publisher = {publisher}" +
+                $" & isbn = {isbn}" +
                 $" & year = {year}" +
                 $" & edition = {edition}" +
                 $" & tags = {tags}" +

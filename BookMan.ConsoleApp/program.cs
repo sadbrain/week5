@@ -1,4 +1,6 @@
-﻿namespace BookMan.ConsoleApp
+﻿using System.Diagnostics;
+
+namespace BookMan.ConsoleApp
 {
     using FrameWork;
 
@@ -62,6 +64,7 @@
         */
         private static void Main(string[] args)
         {
+            
             Console.OutputEncoding = System.Text.Encoding.UTF8;
             ConfigRouter();
             while (true)
@@ -81,13 +84,18 @@
                 {
                     Console.WriteLine();
                 }
-            }
-        }
+                
+            } 
+            //System.Console.WriteLine(System.IO.File.Exists("C:\\Users\\Documents\\My Web Sites\\hello\\Báo cáo việc sử dụng laptop PNV tuần 1.pdf"));
+
+        } 
+        
+            
         //hai hàm test route
 
         private static void About(Parameter parameter)
         {
-            ViewHelp.WriteLine("BOOK MANAGER version 1.0", ConsoleColor.Green);
+            ViewHelp.WriteLine("BOOK MANAGER version 2  .0", ConsoleColor.Green);
             ViewHelp.WriteLine("by dhnynit@TuHocIct.com", ConsoleColor.Magenta);
         }
         

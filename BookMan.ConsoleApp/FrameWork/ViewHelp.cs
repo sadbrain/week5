@@ -100,17 +100,11 @@ namespace BookMan.ConsoleApp.FrameWork
         public static int InputInt (string label, int oldValue, ConsoleColor labelColor = ConsoleColor.Magenta, ConsoleColor valueColor = ConsoleColor.White)
         {
             //fomat update, 
-            Write($"{label}: ", labelColor);
-            WriteLine($"{oldValue}", ConsoleColor.Yellow);
-            Write("New value >> ", ConsoleColor.Green);
-            ForegroundColor = valueColor;
+            Write($"{label} ", labelColor);
+            WriteLine($"{oldValue}", ConsoleColor.Green);
 
-            string str = ReadLine();
-            if (string.IsNullOrEmpty(str)) return oldValue;
-
-            //chuyển sang số nguyên bằng extension ToInt
-            if (str.ToInt(out int i)) return i;
-            return oldValue;
+            int newValue = InputInt("New value >> ", ConsoleColor.Green, valueColor);
+            return newValue <= 0 ? oldValue : newValue;
 
         }
         /// <summary>

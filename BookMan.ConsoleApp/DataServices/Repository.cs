@@ -118,5 +118,64 @@ namespace BookMan.ConsoleApp.DataServices
 
             return _context.Books.GroupBy(b => System.IO.Path.GetDirectoryName(b.File));
         }
+
+        //các hàm bên dưới cho mục đích sắp xếp
+        //hàm chuyển đổi hai đối tướng trong mảng
+        public void Swap(Book[] book, int a, int b)
+        {
+            var temp = book[a];
+            book[a] = book[b];
+            book[b] = temp;
+        }
+
+        //hàm so sánh với lựa chọn so sánh từ người dùng
+        public bool Compare(Book book1, Book book2, string optionSort)
+        {
+            switch (optionSort)
+            {
+                case "author": return string.Compare(book1.Author, book2.Author) <= 0;
+                case "title": return string.Compare(book1.Title, book2.Title) <= 0;
+                case "publisher": return string.Compare(book1.Publisher, book2.Publisher) <= 0;
+                case "year": return book1.Year <= book2.Year;
+                default: return false;
+            }
+        }
+
+        //hai hàm dưới là QickSort
+        public int Partition(Book[] book, int low, int high, string optionSort)
+        {
+            int i = low;
+            var pivot = book[high];
+            for (int j = low; j < high; j++)
+            {
+
+                if (Compare(book[j], pivot, optionSort))
+                {
+                    Swap(book, i, j);
+                    i++;
+                }
+
+            }
+            Swap(book, i, high);
+            return i;
+
+        }
+
+        public void Sort(Book[] book, int low, int high, string optionSort)
+        {
+
+            if (book.Length == 1)
+                return;
+            if (low < high)
+            {
+                int pi = Partition(book, low, high, optionSort);
+
+                Sort(book, low, pi - 1, optionSort);
+                Sort(book, pi + 1, high, optionSort);
+            }
+
+        }
+
+        
     }
 }
